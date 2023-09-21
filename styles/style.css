@@ -8,8 +8,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
     height: 100vh;
+    background: #3C3744;
 }
 
 .game-board{
@@ -19,7 +19,7 @@ body{
 }
 
 .block{
-    border: 2px solid;
+    border: 2px solid #FBFFF1;
     animation-name: loading;
     animation-duration: 1s;
     animation-timing-function: linear;
