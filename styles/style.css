@@ -30,6 +30,35 @@ body{
 
 .header .title{
     color: #FBFFF1;
+    padding: 20px;
+}
+
+.difficulty{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    padding: 20px;
+}
+
+.difficulty button{
+    background: none;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+}
+
+.difficulty button svg path{
+    stroke: #FBFFF1;
+}
+
+.difficulty button:hover{
+    background: #FBFFF1;
+    > svg path{
+        stroke: #3C3744;
+    }
 }
 
 .game-board{
