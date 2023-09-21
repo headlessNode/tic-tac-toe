@@ -12,6 +12,23 @@ body{
     background: #3C3744;
 }
 
+.wrapper{
+    border: 1px solid white;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper > * {
+    border: 1px solid red;
+}
+
+.header .title{
+    color: #FBFFF1;
+}
+
 .game-board{
     display: grid;
     grid-template-columns: repeat(3,90px);
