@@ -18,19 +18,27 @@ body{
 .wrapper{
     border: 1px solid white;
     height: 100%;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    grid-template-rows: 0.2fr 0.2fr 0.2fr 2fr 1fr;
     align-items: center;
+    justify-items: center;
 }
 
-.wrapper > * {
-    border: 1px solid red;
+.wrapper .header{
+    width: 60%;
 }
 
 .header .title{
     color: #FBFFF1;
-    padding: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    font-size: clamp(1rem, 6vw, 2rem);
+    font-weight: bold;
 }
 
 .difficulty{
@@ -38,7 +46,6 @@ body{
     justify-content: space-around;
     align-items: center;
     width: 60%;
-    padding: 20px;
 }
 
 .difficulty button{
