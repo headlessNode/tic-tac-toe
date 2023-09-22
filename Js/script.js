@@ -12,16 +12,20 @@ const game = (()=>{
         return {name};
     }
     
-    const playerOne = Players('X');
-    const playerTwo = Players('O');
-    console.log(playerOne.name);
-    console.log(playerTwo.name);
+    const display = (gameBoard)=>{
+        const boardBlocks = document.querySelectorAll('.block');
+        gameBoard.forEach((value,index,obj) => {
+            boardBlocks[index].textContent = value;
+        });
+    }
 
-
-    return {gameBoard};
+    return {gameBoard, Players, display};
 
 })();
 
+const gameBoard = game.gameBoard();
 
+const playerOne = game.Players('X');
+const plyaerTwo = game.Players('O');
 
-
+const display = game.display(gameBoard);
