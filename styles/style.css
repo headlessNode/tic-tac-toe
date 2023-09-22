@@ -36,10 +36,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
+    padding: 1rem 0 1rem 0;
     font-size: clamp(1rem, 6vw, 2rem);
     font-weight: bold;
 }
+
 
 .difficulty{
     display: flex;
@@ -91,36 +92,36 @@ body{
     }
 }
 
-.block-1{
+.block-0{
     border-top: none;
     border-left: none;
 }
-.block-4{
+.block-3{
     border-left: none;
 }
-.block-7{
+.block-6{
     border-left: none;
+    border-bottom: none;
+}
+
+.block-1{
+    border-top: none;
+}
+
+.block-7{
     border-bottom: none;
 }
 
 .block-2{
     border-top: none;
+    border-right: none;
+}
+
+.block-5{
+    border-right: none;
 }
 
 .block-8{
-    border-bottom: none;
-}
-
-.block-3{
-    border-top: none;
-    border-right: none;
-}
-
-.block-6{
-    border-right: none;
-}
-
-.block-9{
     border-right: none;
     border-bottom: none;
 }
