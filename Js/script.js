@@ -2,82 +2,93 @@ const game = (()=>{
     
     const boardBlockSelector = document.querySelectorAll('.block');
 
-    alert('X goes first');
-
     //create players, also create a property to save their choice.
     const Player = (name)=>{
         name;
+
         let choiceIndex;
-        let choiceMark;
-        return {name, choiceIndex, choiceMark};
+
+
+        return {name, choiceIndex};
     }
+    
 
-    const playerOne = Player('X');
-    const playerTwo = Player('O');
-    playerOne.choiceMark = 'X';
-    playerTwo.choiceMark = 'O';
-    console.log(playerOne);
-    console.log(playerTwo);
-
-    //get the index of playerChoice on the board.
-    playerOne.choiceIndex = prompt('At what index to place your mark? (0-8)', '1');
-    alert('Player O\'s turn');
-    playerTwo.choiceIndex = prompt('At what index to place your mark? (0-8)', '1');
 
     //create an array object to save player choices.
-    const gameBoard = ((playerOne, playerTwo)=>{
-        const board = Array(9).fill('');
+    const gameBoard = (()=>{
+        
+        const createGameBoard = ()=>{
+            let board = Array(9).fill('')
+            return board;
+        }
 
-        console.log(board);
-        console.log('PlayerOne choiceIndex: ' + playerOne.choiceIndex + ' playerTwo choiceIndex: ' + playerTwo.choiceIndex);
+        return {createGameBoard};
 
-        board[playerOne.choiceIndex] = playerOne.choiceMark;
-        board[playerTwo.choiceIndex] = playerTwo.choiceMark;
-
-        return {board};
-    })(playerOne, playerTwo);
-
-    const board = gameBoard.board;
-
-    console.log(board);
+    })();
 
 
     //create an object to display the choices.
 
-    const display = ((board)=>{
+    const display = (()=>{
         
-        let xIndices = [];
-        let oIndices = [];
+        const updateScreen = (board)=>{
+            let xIndices = [];
+            let oIndices = [];
 
-        board.forEach((currentValue, currentIndex)=>{
-            
-            if(currentValue === 'X'){
-                xIndices.push(currentIndex);
-            }
-            else if(currentValue === 'O'){
-                oIndices.push(currentIndex);
-            }
-        });
-
-        console.log(xIndices);
-        console.log(oIndices);
-
-        boardBlockSelector.forEach((currentValue, currentIndex)=>{
-            xIndices.forEach((value, index)=>{
-                if(value === currentIndex){
-                    currentValue.textContent = 'X';
+            board.forEach((currentValue, currentIndex)=>{
+                
+                if(currentValue === 'X'){
+                    xIndices.push(currentIndex);
                 }
-            })
-        })
-
-        boardBlockSelector.forEach((currentValue, currentIndex)=>{
-            oIndices.forEach((value, index)=>{
-                if(value === currentIndex){
-                    currentValue.textContent = 'O';
+                else if(currentValue === 'O'){
+                    oIndices.push(currentIndex);
                 }
-            })
-        })
+            });
 
-    })(board);
+            console.log(xIndices);
+            console.log(oIndices);
+
+            boardBlockSelector.forEach((currentValue, currentIndex)=>{
+                xIndices.forEach((value, index)=>{
+                    if(value === currentIndex){
+                        currentValue.textContent = 'X';
+                    }
+                })
+            })
+
+            boardBlockSelector.forEach((currentValue, currentIndex)=>{
+                oIndices.forEach((value, index)=>{
+                    if(value === currentIndex){
+                        currentValue.textContent = 'O';
+                    }
+                })
+            })
+        }
+
+        return {updateScreen};
+
+    })();
+
+    
+
+    const gameRoundController = (()=>{
+
+
+        function playRound(){
+
+            const playerOne = Player('X');
+            const playerTwo = Player('O');
+
+            let board = gameBoard.createGameBoard();
+
+            display.updateScreen(board);
+
+        }
+
+        playRound();
+        
+
+    })();
+
 
 })();
