@@ -45,8 +45,6 @@ const game = (()=>{
                 }
             });
 
-            console.log(xIndices);
-            console.log(oIndices);
 
             boardBlockSelector.forEach((currentValue, currentIndex)=>{
                 xIndices.forEach((value, index)=>{
@@ -80,6 +78,28 @@ const game = (()=>{
             const playerTwo = Player('O');
 
             let board = gameBoard.createGameBoard();
+
+            let currentPlayer = playerOne;
+            let playerChoiceCount = 0;
+
+            boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
+
+                currentValue.addEventListener('click', ()=>{
+
+                if(currentPlayer == playerOne){
+                    console.log('PlayerOneClicked');
+                    currentPlayer = playerTwo;
+                    playerChoiceCount++;
+                }
+                else{
+                    console.log('PlayerTwoClicked');
+                    currentPlayer = playerOne;
+                    playerChoiceCount++;
+                }
+                })
+
+
+            })
 
             display.updateScreen(board);
 
