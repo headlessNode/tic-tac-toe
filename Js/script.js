@@ -86,20 +86,27 @@ const game = (()=>{
 
                 currentValue.addEventListener('click', ()=>{
 
-                if(currentPlayer == playerOne){
-                    console.log('PlayerOneClickedBlock' + currentIndex);
-                    board[currentIndex] = playerOne.name;
-                    currentPlayer = playerTwo;
-                    playerChoiceCount++;
-                    display.updateScreen(board);
-                }
-                else{
-                    console.log('PlayerTwoClickedBlock' + currentIndex);
-                    board[currentIndex] = playerTwo.name;
-                    currentPlayer = playerOne;
-                    playerChoiceCount++;
-                    display.updateScreen(board);
-                }
+                    if(currentPlayer == playerOne){
+
+                        if(board[currentIndex] === ''){
+                            console.log('Block is empty PlayerOneClickedBlock' + currentIndex);
+                            board[currentIndex] = playerOne.name;
+                            currentPlayer = playerTwo;
+                            playerChoiceCount++;
+                            display.updateScreen(board);
+                        }
+
+                        
+                    }
+                    else{
+                        if(board[currentIndex] === ''){
+                            console.log('Block is empty PlayerTwoClickedBlock' + currentIndex);
+                            board[currentIndex] = playerTwo.name;
+                            currentPlayer = playerOne;
+                            playerChoiceCount++;
+                            display.updateScreen(board);
+                        }
+                    }
                 })
 
 
