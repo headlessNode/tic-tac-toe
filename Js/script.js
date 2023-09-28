@@ -87,21 +87,25 @@ const game = (()=>{
                 currentValue.addEventListener('click', ()=>{
 
                 if(currentPlayer == playerOne){
-                    console.log('PlayerOneClicked');
+                    console.log('PlayerOneClickedBlock' + currentIndex);
+                    board[currentIndex] = playerOne.name;
                     currentPlayer = playerTwo;
                     playerChoiceCount++;
+                    display.updateScreen(board);
                 }
                 else{
-                    console.log('PlayerTwoClicked');
+                    console.log('PlayerTwoClickedBlock' + currentIndex);
+                    board[currentIndex] = playerTwo.name;
                     currentPlayer = playerOne;
                     playerChoiceCount++;
+                    display.updateScreen(board);
                 }
                 })
 
 
             })
 
-            display.updateScreen(board);
+            
 
         }
 
