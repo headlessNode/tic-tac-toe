@@ -30,18 +30,23 @@ const game = (()=>{
     //create an object to display the choices.
 
     const display = (()=>{
-        
+
+        let xIndices = [];
+        let oIndices = [];
+        let alreadyCheckedIndices = [];
+
         const updateScreen = (board)=>{
-            let xIndices = [];
-            let oIndices = [];
+
 
             board.forEach((currentValue, currentIndex)=>{
                 
                 if(currentValue === 'X'){
-                    xIndices.push(currentIndex);
+                    xIndices[currentIndex] = currentIndex;
+                    // alreadyCheckedIndices.push(currentIndex);
                 }
                 else if(currentValue === 'O'){
-                    oIndices.push(currentIndex);
+                    oIndices[currentIndex] = currentIndex;
+                    // alreadyCheckedIndices.push(currentIndex);
                 }
             });
 
@@ -63,7 +68,12 @@ const game = (()=>{
             })
         }
 
-        return {updateScreen};
+        const checkWin = (board)=>{
+            console.log('xIndices ' + xIndices);
+            console.log('oIndices ' + oIndices);
+        }
+
+        return {updateScreen, checkWin};
 
     })();
 
@@ -93,6 +103,7 @@ const game = (()=>{
                             currentPlayer = playerTwo;
                             
                             display.updateScreen(board);
+                            display.checkWin(board);
                         }
 
                         
@@ -103,6 +114,7 @@ const game = (()=>{
                             currentPlayer = playerOne;
 
                             display.updateScreen(board);
+                            display.checkWin(board);
                         }
                     }
                 })
