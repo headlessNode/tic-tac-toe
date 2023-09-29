@@ -33,7 +33,7 @@ const game = (()=>{
 
         let xIndices = Array(9).fill(null);
         let oIndices = Array(9).fill(null);
-        let alreadyCheckedIndices = [];
+
 
         const updateScreen = (board)=>{
 
@@ -42,11 +42,11 @@ const game = (()=>{
                 
                 if(currentValue === 'X'){
                     xIndices[currentIndex] = currentIndex;
-                    // alreadyCheckedIndices.push(currentIndex);
+
                 }
                 else if(currentValue === 'O'){
                     oIndices[currentIndex] = currentIndex;
-                    // alreadyCheckedIndices.push(currentIndex);
+
                 }
             });
 
@@ -72,7 +72,7 @@ const game = (()=>{
 
     })();
 
-    
+    // Logic to check for win condition.
     const winCondition = (()=>{
         
         function checkWin (board, playerChoiceCount){
@@ -103,7 +103,7 @@ const game = (()=>{
         
     })();
 
-
+    //Object to controll the flow of game.
     const gameRoundController = (()=>{
 
 
