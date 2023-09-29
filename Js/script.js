@@ -68,32 +68,41 @@ const game = (()=>{
             })
         }
 
-        const checkWin = (board)=>{
+        return {updateScreen};
+
+    })();
+
+    
+    const winCondition = (()=>{
+        
+        function checkWin (board, playerChoiceCount){
             console.table(board);
 
             if(board[0] === 'X' && board[1] ==='X' && board[2] === 'X' || board[3] === 'X' && board[4] === 'X' && board[5] === 'X'
                 || board[6] === 'X' && board[7] === 'X' && board[8] === 'X'
                 || board[0] === 'X' && board[4] === 'X' && board[8] === 'X'
                 || board[2] === 'X' && board[4] === 'X' && board[6] === 'X'){
-                
-                    console.log('X Wins the game');
+                    
+                console.log('X Wins the game');
             }
 
-            if(board[0] === 'O' && board[1] ==='O' && board[2] === 'O' || board[3] === 'O' && board[4] === 'O' && board[5] === 'O'
+            else if(board[0] === 'O' && board[1] ==='O' && board[2] === 'O' || board[3] === 'O' && board[4] === 'O' && board[5] === 'O'
                 || board[6] === 'O' && board[7] === 'O' && board[8] === 'O'
                 || board[0] === 'O' && board[4] === 'O' && board[8] === 'O'
                 || board[2] === 'O' && board[4] === 'O' && board[6] === 'O'){
+                    
+                console.log('O Wins the game');
+            }
                 
-                    console.log('O Wins the game');
-            }    
-
+            else if (playerChoiceCount === 9){
+                console.log('Its a tie.');
+            }
         }
 
-        return {updateScreen, checkWin};
-
+        return {checkWin};
+        
     })();
 
-    
 
     const gameRoundController = (()=>{
 
@@ -106,6 +115,7 @@ const game = (()=>{
             let board = gameBoard.createGameBoard();
 
             let currentPlayer = playerOne;
+            let playerChoiceCount = 0;
 
 
             boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
@@ -117,9 +127,10 @@ const game = (()=>{
                         if(board[currentIndex] === ''){
                             board[currentIndex] = playerOne.name;
                             currentPlayer = playerTwo;
+                            playerChoiceCount++;
                             
                             display.updateScreen(board);
-                            display.checkWin(board);
+                            winCondition.checkWin(board, playerChoiceCount);
                         }
 
                         
@@ -128,9 +139,10 @@ const game = (()=>{
                         if(board[currentIndex] === ''){
                             board[currentIndex] = playerTwo.name;
                             currentPlayer = playerOne;
+                            playerChoiceCount++;
 
                             display.updateScreen(board);
-                            display.checkWin(board);
+                            winCondition.checkWin(board, playerChoiceCount);
                         }
                     }
                 })
