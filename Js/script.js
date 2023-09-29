@@ -80,11 +80,7 @@ const game = (()=>{
             let board = gameBoard.createGameBoard();
 
             let currentPlayer = playerOne;
-            let playerChoiceCount = 0;
 
-            function tieCondition(){
-                console.log('Its a tie because no one won');
-            }
 
             boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
 
@@ -95,13 +91,6 @@ const game = (()=>{
                         if(board[currentIndex] === ''){
                             board[currentIndex] = playerOne.name;
                             currentPlayer = playerTwo;
-                            playerChoiceCount++;
-                            
-                            if(playerChoiceCount === 9){
-                                
-                                tieCondition();
-                            
-                            }
                             
                             display.updateScreen(board);
                         }
@@ -112,13 +101,6 @@ const game = (()=>{
                         if(board[currentIndex] === ''){
                             board[currentIndex] = playerTwo.name;
                             currentPlayer = playerOne;
-                            playerChoiceCount++;
-
-                            if(playerChoiceCount === 9){
-                                
-                                tieCondition();
-                            
-                            }
 
                             display.updateScreen(board);
                         }
