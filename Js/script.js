@@ -16,7 +16,30 @@ const gameBoard = (()=>{
         return board;
     }
 
+    
     return {createGameBoard};
+
+})();
+
+
+//Object to controll the flow of game.
+const gameRoundController = (()=>{
+
+    const playerOne = Player('X');
+    const playerTwo = Player('O');
+
+    const board = gameBoard.createGameBoard();
+
+    function afterDOM(){
+        console.log('boardAfertDOM: '+board)
+    }
+
+    let currentPlayer = playerOne;
+    let playerChoiceCount = 0;
+
+
+
+    return {afterDOM, board, playerOne, playerTwo};
 
 })();
 
@@ -24,9 +47,22 @@ const gameBoard = (()=>{
 
 const display = (()=>{
 
+    const boardBlockSelector = document.querySelectorAll('.block');
+
     let xIndices = Array(9).fill(null);
     let oIndices = Array(9).fill(null);
 
+
+    const getPlayerChoice = (board, playerOne)=>{
+        boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
+            currentValue.addEventListener('click', ()=>{
+                if(board[currentIndex] === ''){
+                    board[currentIndex] = playerOne.name;
+                    gameRoundController.afterDOM();
+                }
+            })
+        })
+    }
 
     const updateScreen = (board)=>{
 
@@ -61,7 +97,7 @@ const display = (()=>{
         })
     }
 
-        return {updateScreen};
+        return {updateScreen, getPlayerChoice};
 })();
 
 // Logic to check for win condition.
@@ -95,19 +131,9 @@ const winCondition = (()=>{
 
 })();
 
-//Object to controll the flow of game.
-const gameRoundController = (()=>{
 
-    const playerOne = Player('X');
-    const playerTwo = Player('O');
+const game = (()=>{
 
-    let board = gameBoard.createGameBoard();
-
-    let currentPlayer = playerOne;
-    let playerChoiceCount = 0;
-
-
-
+    display.getPlayerChoice(gameRoundController.board,gameRoundController.playerOne);
 
 })();
-
