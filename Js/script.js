@@ -49,17 +49,14 @@ const display = (()=>{
 
     const boardBlockSelector = document.querySelectorAll('.block');
 
-    const board = gameRoundController.board;
-    const playerOne = gameRoundController.playerOne;
-    const playerTwo = gameRoundController.playerTwo;
 
     let xIndices = Array(9).fill(null);
     let oIndices = Array(9).fill(null);
 
-    const updateScreen = (board)=>{
+    const updateScreen = ()=>{
 
 
-        board.forEach((currentValue, currentIndex)=>{
+        gameRoundController.board.forEach((currentValue, currentIndex)=>{
 
             if(currentValue === 'X'){
                 xIndices[currentIndex] = currentIndex;
@@ -92,9 +89,9 @@ const display = (()=>{
     
     boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
         currentValue.addEventListener('click', ()=>{
-            if(board[currentIndex] === ''){
-                board[currentIndex] = playerOne.name;
-                updateScreen(board);
+            if(gameRoundController.board[currentIndex] === ''){
+                gameRoundController.board[currentIndex] = gameRoundController.playerOne.name;
+                updateScreen();
                 gameRoundController.afterDOM();
             }
         })
