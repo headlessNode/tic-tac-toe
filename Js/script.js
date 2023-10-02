@@ -49,20 +49,12 @@ const display = (()=>{
 
     const boardBlockSelector = document.querySelectorAll('.block');
 
+    const board = gameRoundController.board;
+    const playerOne = gameRoundController.playerOne;
+    const playerTwo = gameRoundController.playerTwo;
+
     let xIndices = Array(9).fill(null);
     let oIndices = Array(9).fill(null);
-
-
-    const getPlayerChoice = (board, playerOne)=>{
-        boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
-            currentValue.addEventListener('click', ()=>{
-                if(board[currentIndex] === ''){
-                    board[currentIndex] = playerOne.name;
-                    gameRoundController.afterDOM();
-                }
-            })
-        })
-    }
 
     const updateScreen = (board)=>{
 
@@ -97,7 +89,20 @@ const display = (()=>{
         })
     }
 
-        return {updateScreen, getPlayerChoice};
+    
+    boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
+        currentValue.addEventListener('click', ()=>{
+            if(board[currentIndex] === ''){
+                board[currentIndex] = playerOne.name;
+                updateScreen(board);
+                gameRoundController.afterDOM();
+            }
+        })
+    })
+
+
+
+
 })();
 
 // Logic to check for win condition.
@@ -128,12 +133,5 @@ const winCondition = (()=>{
     }
 
         return {checkWin};
-
-})();
-
-
-const game = (()=>{
-
-    display.getPlayerChoice(gameRoundController.board,gameRoundController.playerOne);
 
 })();
