@@ -30,16 +30,26 @@ const gameRoundController = (()=>{
 
     const board = gameBoard.createGameBoard();
 
-    function afterDOM(){
-        console.log('boardAfertDOM: '+board)
-    }
-
     let currentPlayer = playerOne;
     let playerChoiceCount = 0;
 
+    function afterDOM(){
+        console.log('boardAfertDOM: '+board)
+        if(gameRoundController.currentPlayer === playerOne){
+            playerChoiceCount++;
+            gameRoundController.currentPlayer = playerTwo;
+        }
+        else{
+            playerChoiceCount++;
+            gameRoundController.currentPlayer = playerOne;
+        }
+    }
 
 
-    return {afterDOM, board, playerOne, playerTwo};
+
+
+
+    return {afterDOM, board, playerOne, playerTwo, currentPlayer};
 
 })();
 
@@ -90,9 +100,16 @@ const display = (()=>{
     boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
         currentValue.addEventListener('click', ()=>{
             if(gameRoundController.board[currentIndex] === ''){
-                gameRoundController.board[currentIndex] = gameRoundController.playerOne.name;
-                updateScreen();
-                gameRoundController.afterDOM();
+                if(gameRoundController.currentPlayer === gameRoundController.playerOne){
+                    gameRoundController.board[currentIndex] = gameRoundController.playerOne.name;
+                    updateScreen();
+                    gameRoundController.afterDOM();
+                }
+                else{
+                    gameRoundController.board[currentIndex] = gameRoundController.playerTwo.name;
+                    updateScreen();
+                    gameRoundController.afterDOM();
+                }
             }
         })
     })
