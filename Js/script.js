@@ -22,6 +22,38 @@ const gameBoard = (()=>{
 })();
 
 
+// Logic to check for win condition.
+const winCondition = (()=>{
+
+    function checkWin (){
+
+        if(gameRoundController.board[0] === 'X' && gameRoundController.board[1] ==='X' && gameRoundController.board[2] === 'X' || gameRoundController.board[3] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[5] === 'X'
+            || gameRoundController.board[6] === 'X' && gameRoundController.board[7] === 'X' && gameRoundController.board[8] === 'X'
+            || gameRoundController.board[0] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[8] === 'X'
+            || gameRoundController.board[2] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[6] === 'X' || gameRoundController.board[0] === 'X' && gameRoundController.board[3] === 'X' && gameRoundController.board[6] === 'X'
+            || gameRoundController.board[1] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[7] === 'X' || gameRoundController.board[2] === 'X' && gameRoundController.board[5] === 'X' && gameRoundController.board[8] === 'X'){
+
+            console.log('X Wins the game');
+        }
+
+        else if(gameRoundController.board[0] === 'O' && gameRoundController.board[1] ==='O' && gameRoundController.board[2] === 'O' || gameRoundController.board[3] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[5] === 'O'
+            || gameRoundController.board[6] === 'O' && gameRoundController.board[7] === 'O' && gameRoundController.board[8] === 'O'
+            || gameRoundController.board[0] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[8] === 'O'
+            || gameRoundController.board[2] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[6] === 'O' || gameRoundController.board[0] === 'O' && gameRoundController.board[3] === 'O' && gameRoundController.board[6] === 'O'
+            || gameRoundController.board[1] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[7] === 'O' || gameRoundController.board[2] === 'O' && gameRoundController.board[5] === 'O' && gameRoundController.board[8] === 'O'){
+
+            console.log('O Wins the game');
+        }
+
+        else if (gameRoundController.playerChoiceCount === 8){
+            console.log('Its a tie.');
+        }
+    }
+
+        return {checkWin};
+
+})();
+
 //Object to controll the flow of game.
 const gameRoundController = (()=>{
 
@@ -33,15 +65,17 @@ const gameRoundController = (()=>{
     let currentPlayer = playerOne;
     let playerChoiceCount = 0;
 
-    function afterDOM(){
+    function round(){
         console.log('boardAfertDOM: '+board)
         if(gameRoundController.currentPlayer === playerOne){
             playerChoiceCount++;
             gameRoundController.currentPlayer = playerTwo;
+            winCondition.checkWin();
         }
         else{
             playerChoiceCount++;
             gameRoundController.currentPlayer = playerOne;
+            winCondition.checkWin();
         }
     }
 
@@ -49,7 +83,7 @@ const gameRoundController = (()=>{
 
 
 
-    return {afterDOM, board, playerOne, playerTwo, currentPlayer};
+    return {round, board, playerOne, playerTwo, currentPlayer};
 
 })();
 
@@ -103,12 +137,12 @@ const display = (()=>{
                 if(gameRoundController.currentPlayer === gameRoundController.playerOne){
                     gameRoundController.board[currentIndex] = gameRoundController.playerOne.name;
                     updateScreen();
-                    gameRoundController.afterDOM();
+                    gameRoundController.round();
                 }
                 else{
                     gameRoundController.board[currentIndex] = gameRoundController.playerTwo.name;
                     updateScreen();
-                    gameRoundController.afterDOM();
+                    gameRoundController.round();
                 }
             }
         })
@@ -119,33 +153,4 @@ const display = (()=>{
 
 })();
 
-// Logic to check for win condition.
-const winCondition = (()=>{
 
-    function checkWin (board, playerChoiceCount){
-        console.table(board);
-
-        if(board[0] === 'X' && board[1] ==='X' && board[2] === 'X' || board[3] === 'X' && board[4] === 'X' && board[5] === 'X'
-            || board[6] === 'X' && board[7] === 'X' && board[8] === 'X'
-            || board[0] === 'X' && board[4] === 'X' && board[8] === 'X'
-            || board[2] === 'X' && board[4] === 'X' && board[6] === 'X'){
-
-            console.log('X Wins the game');
-        }
-
-        else if(board[0] === 'O' && board[1] ==='O' && board[2] === 'O' || board[3] === 'O' && board[4] === 'O' && board[5] === 'O'
-            || board[6] === 'O' && board[7] === 'O' && board[8] === 'O'
-            || board[0] === 'O' && board[4] === 'O' && board[8] === 'O'
-            || board[2] === 'O' && board[4] === 'O' && board[6] === 'O'){
-
-            console.log('O Wins the game');
-        }
-
-        else if (playerChoiceCount === 9){
-            console.log('Its a tie.');
-        }
-    }
-
-        return {checkWin};
-
-})();
