@@ -126,6 +126,68 @@ body{
     border-bottom: none;
 }
 
+.game-end-dialog:not([open]){
+    pointer-events: none;
+    opacity: 0;
+}
+
 .game-end-dialog{
-    
+    display: grid;
+    top: 70%;
+    left: 30%;
+    height: max(150px);
+    width: 40%;
+    border-radius: 10px;
+    border: none;
+    background: #FBFFF1;
+}
+
+.game-end-dialog form{
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-rows: 1fr 1fr 2fr;
+}
+
+.game-end-dialog .txt{
+    display: grid;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+}
+
+.game-end-dialog .btns{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.game-end-dialog button{
+    padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
+.game-end-dialog .no-btn{
+    background: #A21C02;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.5s ease-out;
+}
+
+.game-end-dialog .no-btn:hover{
+    background: #FD5635;
+}
+
+.game-end-dialog .yes-btn{
+    background: #83B701;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.5s ease-out;
+}
+.game-end-dialog .yes-btn:hover{
+    background: #A0DF01;
 }
