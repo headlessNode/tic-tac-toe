@@ -25,17 +25,20 @@ const gameBoard = (()=>{
 const winCondition = (()=>{
 
     function displayWinner(){
-
+        const gameEndDialog = document.querySelector('.game-end-dialog');
         if(gameRoundController.playerOne.winner){
             console.log('Player one Won the game');
+            gameEndDialog.show();
         }
 
         else if(gameRoundController.playerTwo.winner){
             console.log('Player two Won the game');
+            gameEndDialog.show();
         }
 
         else{
             console.log('Its a tie!');
+            gameEndDialog.show();
         }
 
     }
