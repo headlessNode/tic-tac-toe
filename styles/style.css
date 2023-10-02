@@ -140,6 +140,8 @@ body{
     border-radius: 10px;
     border: none;
     background: #FBFFF1;
+    opacity: 1;
+    transition: opacity 0.5s ease;
 }
 
 .game-end-dialog form{
