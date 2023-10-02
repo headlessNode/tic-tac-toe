@@ -2,6 +2,7 @@
 const Player = (name)=>{
     name;
 
+    let winner = false;
 
     return {name};
 }
@@ -23,15 +24,32 @@ const gameBoard = (()=>{
 // Logic to check for win condition.
 const winCondition = (()=>{
 
+    function displayWinner(){
+
+        if(gameRoundController.playerOne.winner){
+            console.log('Player one Won the game');
+        }
+
+        else if(gameRoundController.playerTwo.winner){
+            console.log('Player two Won the game');
+        }
+
+        else{
+            console.log('Its a tie!');
+        }
+
+    }
+
     function checkWin (){
 
-        if(gameRoundController.board[0] === 'X' && gameRoundController.board[1] ==='X' && gameRoundController.board[2] === 'X' || gameRoundController.board[3] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[5] === 'X'
-            || gameRoundController.board[6] === 'X' && gameRoundController.board[7] === 'X' && gameRoundController.board[8] === 'X'
+        if(gameRoundController.board[0] === 'X' && gameRoundController.board[1] ==='X' && gameRoundController.board[2] === 'X' || gameRoundController.board[3] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[5] === 'X' || gameRoundController.board[6] === 'X' && gameRoundController.board[7] === 'X' && gameRoundController.board[8] === 'X'
             || gameRoundController.board[0] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[8] === 'X'
             || gameRoundController.board[2] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[6] === 'X' || gameRoundController.board[0] === 'X' && gameRoundController.board[3] === 'X' && gameRoundController.board[6] === 'X'
             || gameRoundController.board[1] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[7] === 'X' || gameRoundController.board[2] === 'X' && gameRoundController.board[5] === 'X' && gameRoundController.board[8] === 'X'){
 
-            console.log('X Wins the game');
+                gameRoundController.playerOne.winner = true;
+                displayWinner();           
+
         }
 
         else if(gameRoundController.board[0] === 'O' && gameRoundController.board[1] ==='O' && gameRoundController.board[2] === 'O' || gameRoundController.board[3] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[5] === 'O'
@@ -40,13 +58,16 @@ const winCondition = (()=>{
             || gameRoundController.board[2] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[6] === 'O' || gameRoundController.board[0] === 'O' && gameRoundController.board[3] === 'O' && gameRoundController.board[6] === 'O'
             || gameRoundController.board[1] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[7] === 'O' || gameRoundController.board[2] === 'O' && gameRoundController.board[5] === 'O' && gameRoundController.board[8] === 'O'){
 
-            console.log('O Wins the game');
+                gameRoundController.playerTwo.winner = true;
+                displayWinner();
         }
 
         else if (gameRoundController.playerChoiceCount === 9){
-            console.log('Its a tie.');
+            displayWinner();
         }
     }
+
+
 
         return {checkWin};
 
