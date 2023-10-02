@@ -45,7 +45,7 @@ const winCondition = (()=>{
             console.log('O Wins the game');
         }
 
-        else if (gameRoundController.playerChoiceCount === 8){
+        else if (gameRoundController.playerChoiceCount === 9){
             console.log('Its a tie.');
         }
     }
@@ -66,15 +66,17 @@ const gameRoundController = (()=>{
     let playerChoiceCount = 0;
 
     function round(){
-        console.log('boardAfertDOM: '+board)
+
         if(gameRoundController.currentPlayer === playerOne){
-            playerChoiceCount++;
+            gameRoundController.playerChoiceCount++;
             gameRoundController.currentPlayer = playerTwo;
+
             winCondition.checkWin();
         }
         else{
-            playerChoiceCount++;
+            gameRoundController.playerChoiceCount++;
             gameRoundController.currentPlayer = playerOne;
+
             winCondition.checkWin();
         }
     }
@@ -83,7 +85,7 @@ const gameRoundController = (()=>{
 
 
 
-    return {round, board, playerOne, playerTwo, currentPlayer};
+    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount};
 
 })();
 
