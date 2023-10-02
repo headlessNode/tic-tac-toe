@@ -2,10 +2,8 @@
 const Player = (name)=>{
     name;
 
-    let choiceIndex;
 
-
-    return {name, choiceIndex};
+    return {name};
 }
 
 //create an array object to save player choices.
@@ -54,7 +52,7 @@ const winCondition = (()=>{
 
 })();
 
-//Object to controll the flow of game.
+//Object to control the flow of game.
 const gameRoundController = (()=>{
 
     const playerOne = Player('X');
