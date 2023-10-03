@@ -124,11 +124,13 @@ body{
 .x-svg{
     width: 100px;
     height: 100px;
+    border: 1px solid white;
 }
 
 .o-svg{
     width: 100px;
     height: 100px;
+    border: 1px solid white;
 }
 
 .game-end-dialog:not([open]){
