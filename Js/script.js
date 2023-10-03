@@ -50,11 +50,11 @@ const winCondition = (()=>{
                 display.xIndices[currentIndex] = null;
             })
             console.log(display.xIndices);
-            
             //clear the screen.
             const gameBoardSelector = document.querySelectorAll('.block');
             gameBoardSelector.forEach((currentValue,currentIndex,obj)=>{
-                currentValue.textContent = '';
+                currentValue.classList.remove('choice-added');
+                currentValue.innerHTML = '';
             })
         }
         else{
@@ -200,7 +200,16 @@ const display = (()=>{
         boardBlockSelector.forEach((currentValue, currentIndex)=>{
             xIndices.forEach((value, index)=>{
                 if(value === currentIndex){
-                    currentValue.textContent = 'X';
+                    if(!currentValue.classList.contains('choice-added')){
+                        let xSvg = document.createElement('img');
+                        xSvg.src = './images/X.svg';
+                        xSvg.classList.add('x-svg');
+
+
+                        currentValue.classList.add('choice-added');
+                        currentValue.appendChild(xSvg);
+                    }
+                    
                 }
             })
         })
@@ -208,7 +217,14 @@ const display = (()=>{
         boardBlockSelector.forEach((currentValue, currentIndex)=>{
             oIndices.forEach((value, index)=>{
                 if(value === currentIndex){
-                    currentValue.textContent = 'O';
+                    if(!currentValue.classList.contains('choice-added')){
+                        var oSvg = document.createElement('img');
+                        oSvg.src = './images/O.svg';
+                        oSvg.classList.add('o-svg');
+
+                        currentValue.classList.add('choice-added');
+                        currentValue.appendChild(oSvg);
+                    }
                 }
             })
         })

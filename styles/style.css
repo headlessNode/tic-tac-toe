@@ -82,6 +82,9 @@ body{
 
 .block{
     border: 2px solid #FBFFF1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .block-0{
@@ -116,6 +119,16 @@ body{
 .block-8{
     border-right: none;
     border-bottom: none;
+}
+
+.x-svg{
+    width: 100px;
+    height: 100px;
+}
+
+.o-svg{
+    width: 100px;
+    height: 100px;
 }
 
 .game-end-dialog:not([open]){
