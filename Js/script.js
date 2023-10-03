@@ -25,7 +25,8 @@ const gameBoard = (()=>{
 const winCondition = (()=>{ 
 
     function endGame(e){
-        if(e.textContent === 'yes'){
+        console.log(e.textContent);
+        if(e.textContent === 'Yes'){
             console.log('yes clicked');
             //clear the gameBoard array
 
