@@ -22,23 +22,58 @@ const gameBoard = (()=>{
 
 
 // Logic to check for win condition.
-const winCondition = (()=>{
+const winCondition = (()=>{ 
+
+    function endGame(e){
+        if(e.textContent === 'yes'){
+            console.log('yes clicked');
+            //clear the gameBoard array
+
+            //clear the screen.
+
+        }
+        else{
+            console.log('no clicked');
+        }
+    }
 
     function displayWinner(){
         const gameEndDialog = document.querySelector('.game-end-dialog');
+        const winner = document.querySelector('.winner')
+        const yesBtn = document.querySelector('.yes-btn');
+        const noBtn = document.querySelector('.no-btn');
+        
         if(gameRoundController.playerOne.winner){
-            console.log('Player one Won the game');
+            winner.textContent = gameRoundController.playerOne.name + ' Won!'
             gameEndDialog.showModal();
+            yesBtn.addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
+            noBtn. addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
         }
 
         else if(gameRoundController.playerTwo.winner){
-            console.log('Player two Won the game');
+            winner.textContent = gameRoundController.playerTwo.name + ' Won!'
             gameEndDialog.showModal();
+            yesBtn.addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
+            noBtn. addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
         }
 
         else{
-            console.log('Its a tie!');
+            winner.textContent = 'Its a tie!'
             gameEndDialog.showModal();
+            yesBtn.addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
+            noBtn. addEventListener('click', (e)=>{
+                endGame(e.target);
+            });
         }
 
     }
