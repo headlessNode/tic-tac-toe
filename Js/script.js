@@ -201,13 +201,23 @@ const display = (()=>{
             xIndices.forEach((value, index)=>{
                 if(value === currentIndex){
                     if(!currentValue.classList.contains('choice-added')){
-                        let xSvg = document.createElement('img');
-                        xSvg.src = './images/X.svg';
-                        xSvg.classList.add('x-svg');
+                        // let xSvg = document.createElement('img');
+                        // xSvg.src = './images/X.svg';
+                        // xSvg.classList.add('x-svg');
 
+                        let svgMarkup = `<?xml version="1.0" encoding="utf-8"?>
+                        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                          <g transform="matrix(0.8710160255432129, 0, 0, 0.8710160255432129, 172.13987731933594, 172.32278442382812)">
+                            <g transform="translate(-136.89 -361.85)" stroke="#000" stroke-width="2">
+                              <path d="M 140.065 363.319 C 206.025 415.313 259.565 481.138 325.259 533.393 C 303.663 553.424 285.896 511.424 267.488 501.963 C 221.95 457.292 178.303 410.093 127.3 371.511 L 140.065 363.319 Z" style="stroke-width: 11.4808px;"/>
+                              <path d="M 289.606 379.62 C 254.513 402.86 225.043 434.157 198.027 466.215 C 181.66 481.501 183.051 512.476 158.931 518.308 C 172.741 484.901 194.101 455.441 221.379 431.74 C 241.742 411.967 261.709 388.375 289.61 379.62 L 289.606 379.62 Z" style="stroke-width: 11.4808px;"/>
+                            </g>
+                          </g>
+                        </svg>`;
 
                         currentValue.classList.add('choice-added');
-                        currentValue.appendChild(xSvg);
+                        currentValue.innerHTML = svgMarkup;
+                        // currentValue.appendChild(xSvg);
                     }
                     
                 }
@@ -218,12 +228,22 @@ const display = (()=>{
             oIndices.forEach((value, index)=>{
                 if(value === currentIndex){
                     if(!currentValue.classList.contains('choice-added')){
-                        var oSvg = document.createElement('img');
-                        oSvg.src = './images/O.svg';
-                        oSvg.classList.add('o-svg');
+                        // var oSvg = document.createElement('img');
+                        // oSvg.src = './images/O.svg';
+                        // oSvg.classList.add('o-svg');
+
+                        let svgMarkup = `<?xml version="1.0" encoding="utf-8"?>
+                            <svg viewBox="8.055 1.151 653.625 500" xmlns="http://www.w3.org/2000/svg">
+                            <g transform="matrix(6.821938991546631, 0, 0, 5.760402202606201, -139.6765594482422, -477.5549011230468)" style="">
+                                <g transform="translate(-136.89 -361.85)" stroke="#000" stroke-width="2">
+                                <path class="o-path" d="M 208.373 473.339 C 205.699 472.843 196.382 475.504 197.928 475.256 C 200.419 473.287 191.705 481.838 193.391 485.761 C 192.208 496.507 203.601 502.716 212.74 503.801 C 215.061 504.01 221.333 501.046 215.991 503.645 C 221.731 496.392 220.217 484.526 214.111 477.751 C 210.271 475.377 202.855 470.05 210.852 470.863 C 219.862 475.018 224.888 485.618 222.491 495.228 C 222.186 505.918 207.392 508.781 200.023 502.982 C 190.455 499.828 186.982 487.577 192.329 479.403 C 195.716 473.373 207.524 470.251 210.782 471.588 L 208.372 473.339 L 208.373 473.339 Z"/>
+                                </g>
+                            </g>
+                            </svg>`;
 
                         currentValue.classList.add('choice-added');
-                        currentValue.appendChild(oSvg);
+                        currentValue.innerHTML = svgMarkup;
+                        // currentValue.appendChild(oSvg);
                     }
                 }
             })
