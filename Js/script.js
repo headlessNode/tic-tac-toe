@@ -28,10 +28,34 @@ const winCondition = (()=>{
         console.log(e.textContent);
         if(e.textContent === 'Yes'){
             console.log('yes clicked');
-            //clear the gameBoard array
+            //reset everything
 
+            //clear the board
+            gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
+                gameRoundController.board[currentIndex] = '';
+            })
+            
+            //reset the vars and props
+            gameRoundController.currentPlayer = gameRoundController.playerOne;
+            gameRoundController.playerChoiceCount = 0;
+            gameRoundController.playerOne.winner = false;
+            gameRoundController.playerTwo.winner = false;
+
+            //clear the arrays in display module
+            display.oIndices.forEach((currentValue,currentIndex,obj)=>{
+                display.oIndices[currentIndex] = null;
+            })
+            console.log(display.oIndices);
+            display.xIndices.forEach((currentValue,currentIndex,obj)=>{
+                display.xIndices[currentIndex] = null;
+            })
+            console.log(display.xIndices);
+            
             //clear the screen.
-
+            const gameBoardSelector = document.querySelectorAll('.block');
+            gameBoardSelector.forEach((currentValue,currentIndex,obj)=>{
+                currentValue.textContent = '';
+            })
         }
         else{
             console.log('no clicked');
@@ -210,7 +234,7 @@ const display = (()=>{
 
 
 
-
+    return {xIndices, oIndices};
 })();
 
 
