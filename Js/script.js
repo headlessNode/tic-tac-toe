@@ -14,6 +14,7 @@ const gameStartDialog = (()=>{
         state: false,
     }
     
+    //change state based on clicked btn
     anotherPlayerBtn.addEventListener('click', (e)=>{
 
         console.log(e.target.textContent + 'clicked');
