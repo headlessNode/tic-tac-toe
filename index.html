@@ -31,9 +31,7 @@
                     </svg>
                 </button>
             </div>
-            <div class="turn">
-                X'S TURN
-            </div>
+            <div class="turn"></div>
             <div class="game-board">
                 <div class="block block-0"></div>
                 <div class="block block-1"></div>
@@ -52,14 +50,17 @@
                     </header>
                     <main>
                         <div class="player-one-container">
-                            <label for="player-one-name">Player One</label>
+                            <label for="player-one-name">Player One (X Mark)</label>
                             <input type="text" id="player-one-name" class="player-one-name" required>
                         </div>
 
                         <div class="player-two-container">
-                            <label for="player-two-name">Player Two</label>
+                            <label for="player-two-name">Player Two (O Mark)</label>
                             <input type="text" id="player-two-name" class="player-two-name" required>
                         </div>
+
+                        <div class="hint"><p>* Player one goes first</p></div>
+
                     </main>
                     <footer>
                         <button autofocus>confirm</button>

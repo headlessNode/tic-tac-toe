@@ -169,6 +169,7 @@ const winCondition = (()=>{
 //Object to control the flow of game.
 const gameRoundController = (()=>{
 
+
     const playerOne = Player('X');
     const playerTwo = Player('O');
 
@@ -205,14 +206,45 @@ const gameRoundController = (()=>{
 
 const display = (()=>{
 
-    const boardBlockSelector = document.querySelectorAll('.block');
+    let playerOneDisplayName;
+    let playerTwoDisplayName;
 
+    const turnDisplay = document.querySelector('.turn');
+    const startDialog = document.querySelector('.players-name-input');
+    
+    startDialog.addEventListener('submit', ()=>{
+        const playerOneNameSelector = document.querySelector('.player-one-name');
+        const playerTwoNameSelector = document.querySelector('.player-two-name');
+        
+        playerOneDisplayName = playerOneNameSelector.value;
+        playerTwoDisplayName = playerTwoNameSelector.value;
+
+        turnDisplay.textContent = playerOneDisplayName + '\'s turn';
+
+        startDialog.style.display = 'none';
+    });
+
+    
+
+    function displayName(){
+
+        if(gameRoundController.playerChoiceCount%2 === 0){
+            turnDisplay.textContent = playerTwoDisplayName + '\'s turn';
+        }
+        else{
+            turnDisplay.textContent = playerOneDisplayName + '\'s turn';
+        }
+
+    }
+
+    const boardBlockSelector = document.querySelectorAll('.block');
 
     let xIndices = Array(9).fill(null);
     let oIndices = Array(9).fill(null);
 
     const updateScreen = ()=>{
-
+       
+        displayName();
 
         gameRoundController.board.forEach((currentValue, currentIndex)=>{
 
