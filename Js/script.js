@@ -21,9 +21,10 @@ const gameBoard = (()=>{
 })();
 
 
-// Logic to check for win condition.
+// Logic to check for win condition and endGame based on that.
 const winCondition = (()=>{ 
 
+    //If someone wins or its a tie.
     function endGame(e){
         console.log(e.textContent);
         if(e.textContent === 'Yes'){
@@ -96,6 +97,7 @@ const winCondition = (()=>{
         }
     }
 
+    //display the winner on the screen.
     function displayWinner(){
         const gameEndDialog = document.querySelector('.game-end-dialog');
         const winner = document.querySelector('.winner')
@@ -140,7 +142,7 @@ const winCondition = (()=>{
         }
 
     }
-
+    //check who won the game.
     function checkWin (){
 
         if(gameRoundController.board[0] === 'X' && gameRoundController.board[1] ==='X' && gameRoundController.board[2] === 'X' || gameRoundController.board[3] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[5] === 'X' || gameRoundController.board[6] === 'X' && gameRoundController.board[7] === 'X' && gameRoundController.board[8] === 'X'
@@ -174,7 +176,7 @@ const winCondition = (()=>{
 
 })();
 
-//Object to control the flow of game.
+//Object to control the flow of game/ turns.
 const gameRoundController = (()=>{
 
     let playerOne = Player();
@@ -182,7 +184,8 @@ const gameRoundController = (()=>{
 
     //dialog to get names from user
     const playersName = document.querySelector('.players-name-input');
-    playersName.showModal();
+    // playersName.showModal();
+    playersName.style.display = 'none';
 
     //get names from user, set the names and marks in the relevant objects.
     playersName.addEventListener('submit', ()=>{
@@ -231,7 +234,6 @@ const gameRoundController = (()=>{
 })();
 
 //create an object to display the choices.
-
 const display = (()=>{
 
     const boardBlockSelector = document.querySelectorAll('.block');
