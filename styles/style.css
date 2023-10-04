@@ -201,15 +201,17 @@ body{
     background: #A0DF01;
 }
 
-.game-start-dialog{
+.players-name-input{
+    display: grid;
+    height: 20rem;
     border: none;
     border-radius: 10px;
     background: #FBFFF1;
-    top:20%;
-    left: 1%;
+    top:30%;
+    left: 40%;
 }
 
-.game-start-dialog form{ 
+.players-name-input form{ 
     display: grid;
     justify-items: center;
     align-items: center;
@@ -217,17 +219,17 @@ body{
     padding: 15px;
 }
 
-.game-start-dialog form main{
+.players-name-input form main{
     display: grid;
     gap: 10px;
 }
 
-.game-start-dialog form .player-one-container, .game-start-dialog form .player-two-container{
+.players-name-input form .player-one-container, .players-name-input form .player-two-container{
     display: grid;
     gap: 5px;
 } 
 
-.game-start-dialog form input[type='text']{
+.players-name-input form input[type='text']{
     border: none;
     border-radius: 10px;
     background: #3C3744;
@@ -235,7 +237,7 @@ body{
     text-indent: 10px;
 }
 
-.game-start-dialog form button{
+.players-name-input form button{
     padding: 10px 1rem 10px 1rem;
     background: #3C3744;
     border: none;
@@ -244,6 +246,6 @@ body{
     cursor: pointer;
 }
 
-.game-start-dialog form button:hover{
+.players-name-input form button:hover{
     background: #5b5763;
 }
