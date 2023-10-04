@@ -142,7 +142,7 @@ body{
     display: grid;
     top: 70%;
     left: 30%;
-    height: max(150px);
+    padding: 20px;
     width: 40%;
     border-radius: 10px;
     border: none;
@@ -156,6 +156,8 @@ body{
     justify-items: center;
     align-items: center;
     grid-template-rows: 1fr 1fr 2fr;
+    gap: 10px;
+    width: 100%;
 }
 
 .game-end-dialog .txt{

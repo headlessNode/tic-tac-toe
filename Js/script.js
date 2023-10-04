@@ -51,6 +51,8 @@ const winCondition = (()=>{
             })
             console.log(display.xIndices);
             //clear the screen.
+            const displayTurn = document.querySelector('.turn');
+            displayTurn.textContent = '';
             const gameBoardSelector = document.querySelectorAll('.block');
             gameBoardSelector.forEach((currentValue,currentIndex,obj)=>{
                 currentValue.classList.remove('choice-added');
@@ -81,6 +83,8 @@ const winCondition = (()=>{
             })
             console.log(display.xIndices);
             //clear the screen.
+            const displayTurn = document.querySelector('.turn');
+            displayTurn.textContent = '';
             const gameBoardSelector = document.querySelectorAll('.block');
             gameBoardSelector.forEach((currentValue,currentIndex,obj)=>{
                 currentValue.classList.remove('choice-added');
