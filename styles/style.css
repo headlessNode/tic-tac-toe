@@ -200,3 +200,50 @@ body{
 .game-end-dialog .yes-btn:hover{
     background: #A0DF01;
 }
+
+.game-start-dialog{
+    border: none;
+    border-radius: 10px;
+    background: #FBFFF1;
+    top:20%;
+    left: 1%;
+}
+
+.game-start-dialog form{ 
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: 20px;
+    padding: 15px;
+}
+
+.game-start-dialog form main{
+    display: grid;
+    gap: 10px;
+}
+
+.game-start-dialog form .player-one-container, .game-start-dialog form .player-two-container{
+    display: grid;
+    gap: 5px;
+} 
+
+.game-start-dialog form input[type='text']{
+    border: none;
+    border-radius: 10px;
+    background: #3C3744;
+    color: #FBFFF1;
+    text-indent: 10px;
+}
+
+.game-start-dialog form button{
+    padding: 10px 1rem 10px 1rem;
+    background: #3C3744;
+    border: none;
+    border-radius: 10px;
+    color: #FBFFF1;
+    cursor: pointer;
+}
+
+.game-start-dialog form button:hover{
+    background: #5b5763;
+}
