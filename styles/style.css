@@ -203,12 +203,13 @@ body{
 
 .players-name-input{
     display: grid;
+    position: absolute;
     height: 20rem;
+    width: 20rem;
     border: none;
     border-radius: 10px;
     background: #FBFFF1;
-    top:30%;
-    left: 40%;
+    margin: auto;
 }
 
 .players-name-input form{ 
