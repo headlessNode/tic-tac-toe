@@ -211,7 +211,7 @@ const display = (()=>{
 
     const turnDisplay = document.querySelector('.turn');
     const startDialog = document.querySelector('.players-name-input');
-    
+    startDialog.showModal();
     startDialog.addEventListener('submit', ()=>{
         const playerOneNameSelector = document.querySelector('.player-one-name');
         const playerTwoNameSelector = document.querySelector('.player-two-name');
