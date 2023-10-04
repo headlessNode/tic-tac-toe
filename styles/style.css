@@ -85,6 +85,11 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+}
+
+.block:hover{
+    background: #5b5763;
 }
 
 .block-0{
