@@ -27,7 +27,7 @@ const winCondition = (()=>{
     function endGame(e){
         console.log(e.textContent);
         if(e.textContent === 'Yes'){
-            console.log('yes clicked');
+
             //reset everything
 
             //clear the board
@@ -58,7 +58,37 @@ const winCondition = (()=>{
             })
         }
         else{
-            console.log('no clicked');
+            //reset everything
+
+            //clear the board
+            gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
+                gameRoundController.board[currentIndex] = '';
+            })
+            
+            //reset the vars and props
+            gameRoundController.currentPlayer = gameRoundController.playerOne;
+            gameRoundController.playerChoiceCount = 0;
+            gameRoundController.playerOne.winner = false;
+            gameRoundController.playerTwo.winner = false;
+
+            //clear the arrays in display module
+            display.oIndices.forEach((currentValue,currentIndex,obj)=>{
+                display.oIndices[currentIndex] = null;
+            })
+            console.log(display.oIndices);
+            display.xIndices.forEach((currentValue,currentIndex,obj)=>{
+                display.xIndices[currentIndex] = null;
+            })
+            console.log(display.xIndices);
+            //clear the screen.
+            const gameBoardSelector = document.querySelectorAll('.block');
+            gameBoardSelector.forEach((currentValue,currentIndex,obj)=>{
+                currentValue.classList.remove('choice-added');
+                currentValue.innerHTML = '';
+            })
+
+            window.location.href = "https://www.youtube.com/watch?v=xvFZjo5PgG0";
+
         }
     }
 
