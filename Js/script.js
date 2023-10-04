@@ -1,10 +1,10 @@
 //create players, also create a property to save their choice.
-const Player = (name)=>{
-    name;
-
+const Player = ()=>{
+    let name;
+    let mark;
     let winner = false;
 
-    return {name};
+    return {name, mark, winner};
 }
 
 //create an array object to save player choices.
@@ -169,9 +169,26 @@ const winCondition = (()=>{
 //Object to control the flow of game.
 const gameRoundController = (()=>{
 
+    let playerOne = Player();
+    let playerTwo = Player();
 
-    const playerOne = Player('X');
-    const playerTwo = Player('O');
+    const playersName = document.querySelector('.players-name-input');
+    playersName.showModal();
+    playersName.addEventListener('submit', ()=>{
+
+        const playerOneName = document.querySelector('.player-one-name');
+        const playerTwoName = document.querySelector('.player-two-name');
+
+        playerOne.name = playerOneName.value;
+        playerOne.mark = 'X';
+        playerTwo.name = playerTwoName.value;
+        playerTwo.mark = 'O';
+
+        playersName.style.display = 'none';
+
+    })
+
+
 
     const board = gameBoard.createGameBoard();
 
@@ -206,45 +223,14 @@ const gameRoundController = (()=>{
 
 const display = (()=>{
 
-    let playerOneDisplayName;
-    let playerTwoDisplayName;
-
-    const turnDisplay = document.querySelector('.turn');
-    const startDialog = document.querySelector('.players-name-input');
-    startDialog.showModal();
-    startDialog.addEventListener('submit', ()=>{
-        const playerOneNameSelector = document.querySelector('.player-one-name');
-        const playerTwoNameSelector = document.querySelector('.player-two-name');
-        
-        playerOneDisplayName = playerOneNameSelector.value;
-        playerTwoDisplayName = playerTwoNameSelector.value;
-
-        turnDisplay.textContent = playerOneDisplayName + '\'s turn';
-
-        startDialog.style.display = 'none';
-    });
-
-    
-
-    function displayName(){
-
-        if(gameRoundController.playerChoiceCount%2 === 0){
-            turnDisplay.textContent = playerTwoDisplayName + '\'s turn';
-        }
-        else{
-            turnDisplay.textContent = playerOneDisplayName + '\'s turn';
-        }
-
-    }
-
     const boardBlockSelector = document.querySelectorAll('.block');
+
 
     let xIndices = Array(9).fill(null);
     let oIndices = Array(9).fill(null);
 
     const updateScreen = ()=>{
-       
-        displayName();
+
 
         gameRoundController.board.forEach((currentValue, currentIndex)=>{
 
@@ -316,6 +302,7 @@ const display = (()=>{
     boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
         currentValue.addEventListener('click', ()=>{
             if(gameRoundController.board[currentIndex] === ''){
+                console.log(gameRoundController.playerOne);
                 if(gameRoundController.currentPlayer === gameRoundController.playerOne){
                     gameRoundController.board[currentIndex] = gameRoundController.playerOne.name;
                     updateScreen();
