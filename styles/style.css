@@ -143,11 +143,11 @@ body{
     justify-items: center;
     align-items: center;
     border: none;
+    top: 10%;
     border-radius: 10px;
-    top:10%;
     height: 20%;
     width: 50%;
-    margin: auto;
+    margin: 0 auto 0 auto;
     background: #FBFFF1;
 }
 

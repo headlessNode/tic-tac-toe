@@ -1,3 +1,37 @@
+//module for gamestartdialog
+const gameStartDialog = (()=>{
+    const startDialogSelector = document.querySelector('.game-start-dialog');
+    startDialogSelector.showModal();
+
+    const anotherPlayerBtn = document.querySelector('.another-player');
+    const computerBtn = document.querySelector('.computer');
+    
+    let anotherPlayerClicked = {
+        state: false,
+    }
+
+    let computerClicked = {
+        state: false,
+    }
+    
+    anotherPlayerBtn.addEventListener('click', (e)=>{
+
+        console.log(e.target.textContent + 'clicked');
+        gameStartDialog.anotherPlayerClicked.state = true;
+        startDialogSelector.style.display = 'none';
+
+    });
+
+    computerBtn.addEventListener('click', (e)=>{
+        console.log(e.target.textContent + 'clicked');
+        gameStartDialog.computerClicked.state = true;
+        startDialogSelector.style.display = 'none';
+    })
+
+    return {anotherPlayerClicked, computerClicked};
+
+})();
+
 //create players, also create a property to save their choice.
 const Player = ()=>{
     let name;
