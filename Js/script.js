@@ -20,6 +20,8 @@ const gameStartDialog = (()=>{
         console.log(e.target.textContent + 'clicked');
         gameStartDialog.anotherPlayerClicked.state = true;
         startDialogSelector.style.display = 'none';
+        const difficulty = document.querySelector('.difficulty');
+        difficulty.innerHTML = '';
         gameRoundController.createOpponents();
 
     });
@@ -235,6 +237,7 @@ const gameRoundController = (()=>{
                 const playerOneName = document.querySelector('.player-one-name');
                 const playerTwoName = document.querySelector('.player-two-name');
 
+
                 playerOne.name = playerOneName.value;
                 playerOne.mark = 'X';
                 playerTwo.name = playerTwoName.value;
@@ -244,6 +247,13 @@ const gameRoundController = (()=>{
 
             })  
 
+        }
+
+        else if(gameStartDialog.computerClicked.state){
+            playerOne.name = 'You';
+            playerOne.mark = 'X';
+            playerTwo.name = 'Computer';
+            playerTwo.mark = 'O';
         }
 
     }
