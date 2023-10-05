@@ -266,17 +266,37 @@ const gameRoundController = (()=>{
 
     function takeComputerChoice(){
 
-        let computerChoiceIndex = Math.floor(Math.random() * 9);
-        console.log(computerChoiceIndex);
+        let indicesAlreadyTaken = [];
 
-        gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
-            if(currentValue === ''){
-                if(computerChoiceIndex === currentIndex){
-                    gameRoundController.board[computerChoiceIndex] = gameRoundController.playerTwo.mark;
-                }
-
+        gameRoundController.board.forEach((currentValue,currentIndex,obj)=>{
+            if(currentValue != ''){
+                indicesAlreadyTaken.push(currentIndex);
             }
-        })
+        });
+
+        if(gameRoundController.playerChoiceCount <= 8){
+            function generateRandomNumber(indicesAlreadyTaken){
+
+                let randomNumber;
+    
+                do{
+                    randomNumber = Math.floor(Math.random() * 9);
+                } while(indicesAlreadyTaken.includes(randomNumber));
+    
+                return randomNumber;
+            }
+    
+            let computerChoiceIndex = generateRandomNumber(indicesAlreadyTaken);
+            console.log(computerChoiceIndex);
+    
+            gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
+                if(currentValue === ''){
+                    if(computerChoiceIndex === currentIndex){
+                        gameRoundController.board[computerChoiceIndex] = gameRoundController.playerTwo.mark;
+                    }
+                }
+            })
+        }
 
         gameRoundController.playerChoiceCount++;
         gameRoundController.currentPlayer = playerOne;
