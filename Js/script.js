@@ -296,18 +296,20 @@ const gameRoundController = (()=>{
                     }
                 }
             })
+
+            gameRoundController.playerChoiceCount++;
+            console.log('playerChoiceCount update2 '+ gameRoundController.playerChoiceCount);
+            gameRoundController.currentPlayer = playerOne;
         }
 
-        gameRoundController.playerChoiceCount++;
-        gameRoundController.currentPlayer = playerOne;
 
-        console.log(gameRoundController.board);
-        console.log('computer choice added to the gameboardarray');
+
 
     }
 
     function updatePlayerComputerChoices(){
         gameRoundController.playerChoiceCount++;
+        console.log('playerChoiceCount update1: ' + gameRoundController.playerChoiceCount)
         gameRoundController.currentPlayer = playerTwo;
         gameRoundController.takeComputerChoice();
     }
