@@ -288,6 +288,17 @@ const gameRoundController = (()=>{
 
 })();
 
+//create a module for computer choice
+const computerChoice = (()=>{
+
+    function takeComputerChoice(){
+
+        console.log('computer choice added to the gameboardarray');
+
+    }
+
+})();
+
 //create an object to display the choices.
 const display = (()=>{
 
@@ -400,6 +411,7 @@ const display = (()=>{
                 else if(gameStartDialog.computerClicked.state){
                     if(gameRoundController.currentPlayer === gameRoundController.playerOne){
                         gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
+                        computerChoice.takeComputerChoice();
                         updateScreen();
                         gameRoundController.round();
                     }
