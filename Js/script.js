@@ -264,33 +264,6 @@ const gameRoundController = (()=>{
     let currentPlayer = playerOne;
     let playerChoiceCount = 0;
 
-    function round(){
-
-        if(gameRoundController.currentPlayer === playerOne){
-            gameRoundController.playerChoiceCount++;
-            gameRoundController.currentPlayer = playerTwo;
-
-            winCondition.checkWin();
-        }
-        else{
-            gameRoundController.playerChoiceCount++;
-            gameRoundController.currentPlayer = playerOne;
-
-            winCondition.checkWin();
-        }
-    }
-
-
-
-
-
-    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount, createOpponents};
-
-})();
-
-//create a module for computer choice
-const computerChoice = (()=>{
-
     function takeComputerChoice(){
 
         let computerChoiceIndex = Math.floor(Math.random() * 9);
@@ -310,10 +283,37 @@ const computerChoice = (()=>{
 
     }
 
+    function round(){
+        
+        if(gameStartDialog.anotherPlayerClicked.state){
+            if(gameRoundController.currentPlayer === playerOne){
+                gameRoundController.playerChoiceCount++;
+                gameRoundController.currentPlayer = playerTwo;
+    
+                winCondition.checkWin();
+            }
+            else{
+                gameRoundController.playerChoiceCount++;
+                gameRoundController.currentPlayer = playerOne;
+    
+                winCondition.checkWin();
+            }
+        }
 
-    return {takeComputerChoice};
+        else if(gameStartDialog.computerClicked.state){
+
+        }
+        
+    }
+
+
+
+
+
+    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount, createOpponents, takeComputerChoice};
 
 })();
+
 
 //create an object to display the choices.
 const display = (()=>{
@@ -429,7 +429,7 @@ const display = (()=>{
                         gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
                         //take computers choice
                         console.log(gameRoundController.playerTwo);
-                        computerChoice.takeComputerChoice();
+                        gameRoundController.takeComputerChoice();
                         
                         updateScreen();
                         gameRoundController.round();
