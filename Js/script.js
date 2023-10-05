@@ -293,9 +293,25 @@ const computerChoice = (()=>{
 
     function takeComputerChoice(){
 
+        let computerChoiceIndex = Math.floor(Math.random() * 9);
+        console.log(computerChoiceIndex);
+
+        gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
+            if(currentValue === ''){
+                if(computerChoiceIndex === currentIndex){
+                    gameRoundController.board[computerChoiceIndex] = gameRoundController.playerTwo.mark;
+                }
+
+            }
+        })
+
+        console.log(gameRoundController.board);
         console.log('computer choice added to the gameboardarray');
 
     }
+
+
+    return {takeComputerChoice};
 
 })();
 
@@ -411,7 +427,10 @@ const display = (()=>{
                 else if(gameStartDialog.computerClicked.state){
                     if(gameRoundController.currentPlayer === gameRoundController.playerOne){
                         gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
+                        //take computers choice
+                        console.log(gameRoundController.playerTwo);
                         computerChoice.takeComputerChoice();
+                        
                         updateScreen();
                         gameRoundController.round();
                     }
