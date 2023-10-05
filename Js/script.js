@@ -385,16 +385,26 @@ const display = (()=>{
         currentValue.addEventListener('click', ()=>{
             if(gameRoundController.board[currentIndex] === ''){
 
-                if(gameRoundController.currentPlayer === gameRoundController.playerOne){
-                    gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
-                    updateScreen();
-                    gameRoundController.round();
+                if(gameStartDialog.anotherPlayerClicked.state){
+                    if(gameRoundController.currentPlayer === gameRoundController.playerOne){
+                        gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
+                        updateScreen();
+                        gameRoundController.round();
+                    }
+                    else{
+                        gameRoundController.board[currentIndex] = gameRoundController.playerTwo.mark;
+                        updateScreen();
+                        gameRoundController.round();
+                    }
                 }
-                else{
-                    gameRoundController.board[currentIndex] = gameRoundController.playerTwo.mark;
-                    updateScreen();
-                    gameRoundController.round();
+                else if(gameStartDialog.computerClicked.state){
+                    if(gameRoundController.currentPlayer === gameRoundController.playerOne){
+                        gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
+                        updateScreen();
+                        gameRoundController.round();
+                    }
                 }
+
             }
         })
     })
