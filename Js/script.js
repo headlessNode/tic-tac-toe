@@ -278,9 +278,18 @@ const gameRoundController = (()=>{
             }
         })
 
+        gameRoundController.playerChoiceCount++;
+        gameRoundController.currentPlayer = playerOne;
+
         console.log(gameRoundController.board);
         console.log('computer choice added to the gameboardarray');
 
+    }
+
+    function updatePlayerComputerChoices(){
+        gameRoundController.playerChoiceCount++;
+        gameRoundController.currentPlayer = playerTwo;
+        gameRoundController.takeComputerChoice();
     }
 
     function round(){
@@ -302,6 +311,8 @@ const gameRoundController = (()=>{
 
         else if(gameStartDialog.computerClicked.state){
 
+            winCondition.checkWin();
+
         }
         
     }
@@ -310,7 +321,7 @@ const gameRoundController = (()=>{
 
 
 
-    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount, createOpponents, takeComputerChoice};
+    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount, createOpponents, takeComputerChoice, updatePlayerComputerChoices};
 
 })();
 
@@ -427,12 +438,15 @@ const display = (()=>{
                 else if(gameStartDialog.computerClicked.state){
                     if(gameRoundController.currentPlayer === gameRoundController.playerOne){
                         gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
-                        //take computers choice
-                        console.log(gameRoundController.playerTwo);
-                        gameRoundController.takeComputerChoice();
                         
+                        //update the choice count, change current player to computer, take computers choice, update choice count, update currentplayer.
+                        gameRoundController.updatePlayerComputerChoices();
+                        
+                        //display choice of player one.
                         updateScreen();
+                        
                         gameRoundController.round();
+   
                     }
                 }
 
