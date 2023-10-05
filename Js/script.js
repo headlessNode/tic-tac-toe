@@ -20,6 +20,7 @@ const gameStartDialog = (()=>{
         console.log(e.target.textContent + 'clicked');
         gameStartDialog.anotherPlayerClicked.state = true;
         startDialogSelector.style.display = 'none';
+        gameRoundController.createOpponents();
 
     });
 
@@ -27,6 +28,7 @@ const gameStartDialog = (()=>{
         console.log(e.target.textContent + 'clicked');
         gameStartDialog.computerClicked.state = true;
         startDialogSelector.style.display = 'none';
+        gameRoundController.createOpponents();
     })
 
     return {anotherPlayerClicked, computerClicked};
@@ -217,26 +219,34 @@ const gameRoundController = (()=>{
     let playerOne = Player();
     let playerTwo = Player();
 
-    //dialog to get names from user
-    const playersName = document.querySelector('.players-name-input');
-    // playersName.showModal();
-    playersName.style.display = 'none';
+    //call after the selection of opponent
+    function createOpponents(){
 
-    //get names from user, set the names and marks in the relevant objects.
-    playersName.addEventListener('submit', ()=>{
+        //if opponent is another player get names for both
+        if(gameStartDialog.anotherPlayerClicked.state){
+            //dialog to get names from user
+            const playersName = document.querySelector('.players-name-input');
+            playersName.style.display = 'grid';
+            playersName.showModal();
 
-        const playerOneName = document.querySelector('.player-one-name');
-        const playerTwoName = document.querySelector('.player-two-name');
+            //get names from user, set the names and marks in the relevant objects.
+            playersName.addEventListener('submit', ()=>{
 
-        playerOne.name = playerOneName.value;
-        playerOne.mark = 'X';
-        playerTwo.name = playerTwoName.value;
-        playerTwo.mark = 'O';
+                const playerOneName = document.querySelector('.player-one-name');
+                const playerTwoName = document.querySelector('.player-two-name');
 
-        playersName.style.display = 'none';
+                playerOne.name = playerOneName.value;
+                playerOne.mark = 'X';
+                playerTwo.name = playerTwoName.value;
+                playerTwo.mark = 'O';
 
-    })
+                playersName.style.display = 'none';
 
+            })  
+
+        }
+
+    }
 
 
     const board = gameBoard.createGameBoard();
@@ -264,7 +274,7 @@ const gameRoundController = (()=>{
 
 
 
-    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount};
+    return {round, board, playerOne, playerTwo, currentPlayer, playerChoiceCount, createOpponents};
 
 })();
 

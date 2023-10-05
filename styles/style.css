@@ -255,7 +255,7 @@ body{
 }
 
 .players-name-input{
-    display: grid;
+    display: none;
     position: absolute;
     height: 20rem;
     width: 20rem;
