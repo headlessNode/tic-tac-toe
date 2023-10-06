@@ -157,15 +157,31 @@ const winCondition = (()=>{
         }
 
         else if(gameRoundController.playerTwo.winner){
-            displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
-            winner.textContent = gameRoundController.playerTwo.name + ' Won!'
-            gameEndDialog.showModal();
-            yesBtn.addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
-            noBtn. addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
+            if(gameStartDialog.anotherPlayerClicked.state){
+                displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
+                winner.textContent = gameRoundController.playerTwo.name + ' Won!'
+                gameEndDialog.showModal();
+                yesBtn.addEventListener('click', (e)=>{
+                    endGame(e.target);
+                });
+                noBtn. addEventListener('click', (e)=>{
+                    endGame(e.target);
+                });
+            }
+            else if(gameStartDialog.computerClicked.state){
+                let delayInMilliseconds = 1200;
+                setTimeout(()=>{
+                    displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
+                    winner.textContent = gameRoundController.playerTwo.name + ' Won!'
+                    gameEndDialog.showModal();
+                    yesBtn.addEventListener('click', (e)=>{
+                        endGame(e.target);
+                    });
+                    noBtn. addEventListener('click', (e)=>{
+                        endGame(e.target);
+                    });
+                }, delayInMilliseconds);
+            }
         }
 
         else{
@@ -372,7 +388,9 @@ const display = (()=>{
             }
         }
 
-        displayName();
+        if(gameStartDialog.anotherPlayerClicked.state){
+            displayName();
+        }
 
         gameRoundController.board.forEach((currentValue, currentIndex)=>{
 
@@ -416,24 +434,50 @@ const display = (()=>{
 
         boardBlockSelector.forEach((currentValue, currentIndex)=>{
             oIndices.forEach((value, index)=>{
-                if(value === currentIndex){
-                    if(!currentValue.classList.contains('choice-added')){
-                        // var oSvg = document.createElement('img');
-                        // oSvg.src = './images/O.svg';
-                        // oSvg.classList.add('o-svg');
-
-                        let svgMarkup = `<?xml version="1.0" encoding="utf-8"?>
-                            <svg viewBox="8.055 1.151 653.625 500" xmlns="http://www.w3.org/2000/svg">
-                            <g transform="matrix(6.821938991546631, 0, 0, 5.760402202606201, -139.6765594482422, -477.5549011230468)" style="">
-                                <g transform="translate(-136.89 -361.85)" stroke="#000" stroke-width="2">
-                                <path class="o-path" d="M 208.373 473.339 C 205.699 472.843 196.382 475.504 197.928 475.256 C 200.419 473.287 191.705 481.838 193.391 485.761 C 192.208 496.507 203.601 502.716 212.74 503.801 C 215.061 504.01 221.333 501.046 215.991 503.645 C 221.731 496.392 220.217 484.526 214.111 477.751 C 210.271 475.377 202.855 470.05 210.852 470.863 C 219.862 475.018 224.888 485.618 222.491 495.228 C 222.186 505.918 207.392 508.781 200.023 502.982 C 190.455 499.828 186.982 487.577 192.329 479.403 C 195.716 473.373 207.524 470.251 210.782 471.588 L 208.372 473.339 L 208.373 473.339 Z"/>
+                if(gameStartDialog.anotherPlayerClicked.state){
+                    if(value === currentIndex){
+                        if(!currentValue.classList.contains('choice-added')){
+                            // var oSvg = document.createElement('img');
+                            // oSvg.src = './images/O.svg';
+                            // oSvg.classList.add('o-svg');
+    
+                            let svgMarkup = `<?xml version="1.0" encoding="utf-8"?>
+                                <svg viewBox="8.055 1.151 653.625 500" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="matrix(6.821938991546631, 0, 0, 5.760402202606201, -139.6765594482422, -477.5549011230468)" style="">
+                                    <g transform="translate(-136.89 -361.85)" stroke="#000" stroke-width="2">
+                                    <path class="o-path" d="M 208.373 473.339 C 205.699 472.843 196.382 475.504 197.928 475.256 C 200.419 473.287 191.705 481.838 193.391 485.761 C 192.208 496.507 203.601 502.716 212.74 503.801 C 215.061 504.01 221.333 501.046 215.991 503.645 C 221.731 496.392 220.217 484.526 214.111 477.751 C 210.271 475.377 202.855 470.05 210.852 470.863 C 219.862 475.018 224.888 485.618 222.491 495.228 C 222.186 505.918 207.392 508.781 200.023 502.982 C 190.455 499.828 186.982 487.577 192.329 479.403 C 195.716 473.373 207.524 470.251 210.782 471.588 L 208.372 473.339 L 208.373 473.339 Z"/>
+                                    </g>
                                 </g>
-                            </g>
-                            </svg>`;
-
-                        currentValue.classList.add('choice-added');
-                        currentValue.innerHTML = svgMarkup;
-                        // currentValue.appendChild(oSvg);
+                                </svg>`;
+    
+                            currentValue.classList.add('choice-added');
+                            currentValue.innerHTML = svgMarkup;
+                            // currentValue.appendChild(oSvg);
+                        }
+                    }
+                }
+                else if(gameStartDialog.computerClicked.state){
+                    
+                    if(value === currentIndex){
+                        if(!currentValue.classList.contains('choice-added')){
+                            // var oSvg = document.createElement('img');
+                            // oSvg.src = './images/O.svg';
+                            // oSvg.classList.add('o-svg');
+    
+                            let svgMarkup = `<?xml version="1.0" encoding="utf-8"?>
+                                <svg viewBox="8.055 1.151 653.625 500" xmlns="http://www.w3.org/2000/svg">
+                                <g transform="matrix(6.821938991546631, 0, 0, 5.760402202606201, -139.6765594482422, -477.5549011230468)" style="">
+                                    <g transform="translate(-136.89 -361.85)" stroke="#000" stroke-width="2">
+                                    <path class="o-path" d="M 208.373 473.339 C 205.699 472.843 196.382 475.504 197.928 475.256 C 200.419 473.287 191.705 481.838 193.391 485.761 C 192.208 496.507 203.601 502.716 212.74 503.801 C 215.061 504.01 221.333 501.046 215.991 503.645 C 221.731 496.392 220.217 484.526 214.111 477.751 C 210.271 475.377 202.855 470.05 210.852 470.863 C 219.862 475.018 224.888 485.618 222.491 495.228 C 222.186 505.918 207.392 508.781 200.023 502.982 C 190.455 499.828 186.982 487.577 192.329 479.403 C 195.716 473.373 207.524 470.251 210.782 471.588 L 208.372 473.339 L 208.373 473.339 Z"/>
+                                    </g>
+                                </g>
+                                </svg>`;
+    
+                            currentValue.classList.add('choice-added');
+                            let delayInMilliseconds = 1000;
+                            setTimeout(()=>{currentValue.innerHTML = svgMarkup;}, delayInMilliseconds);
+                            // currentValue.appendChild(oSvg);
+                        }
                     }
                 }
             })
@@ -464,7 +508,7 @@ const display = (()=>{
                         //update the choice count, change current player to computer, take computers choice, update choice count, update currentplayer.
                         gameRoundController.updatePlayerComputerChoices();
                         
-                        //display choice of player one.
+                        //display the choices.
                         updateScreen();
                         
                         gameRoundController.round();
