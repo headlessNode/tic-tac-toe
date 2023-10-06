@@ -211,6 +211,10 @@ body{
     width: 100%;
 }
 
+.game-end-dialog form .hint{
+    text-align: center;
+}
+
 .game-end-dialog .txt{
     display: grid;
     width: 100%;
