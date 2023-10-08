@@ -145,15 +145,30 @@ const winCondition = (()=>{
         const displayTurn = document.querySelector('.turn');
         
         if(gameRoundController.playerOne.winner){
-            displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
-            winner.textContent = gameRoundController.playerOne.name + ' Won!'
-            gameEndDialog.showModal();
-            yesBtn.addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
-            noBtn. addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
+            if(gameStartDialog.anotherPlayerClicked.state){
+                displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
+                winner.textContent = gameRoundController.playerOne.name + ' Won!'
+                gameEndDialog.showModal();
+                yesBtn.addEventListener('click', (e)=>{
+                    endGame(e.target);
+                });
+                noBtn. addEventListener('click', (e)=>{
+                    endGame(e.target);
+                });
+            }
+            else if(gameStartDialog.computerClicked.state){
+                let delayInMilliseconds = 1200;
+                setTimeout(()=>{
+                    displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
+                    winner.textContent = gameRoundController.playerOne.name + ' Won!'
+                    gameEndDialog.showModal();
+                    yesBtn.addEventListener('click', (e)=>{
+                        endGame(e.target);
+                    });
+                    noBtn. addEventListener('click', (e)=>{
+                        endGame(e.target);
+                    });}, delayInMilliseconds);
+            }
         }
 
         else if(gameRoundController.playerTwo.winner){
