@@ -41,33 +41,31 @@ body{
     font-weight: bold;
 }
 
-
 .difficulty{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    width: 60%;
-    color: #FBFFF1;
+    gap: 2rem;
+    width: 30%;
+    padding: 10px;
+}
+
+.difficulty p {
+    height: 1rem;
 }
 
 .difficulty button{
+    border: 1px solid #FBFFF1;
+    width: 7rem;
+    border-radius: 10px;
+    padding: 0.5rem 1rem 0.5rem 1rem;
     background: none;
-    border: none;
-    border-radius: 10%;
-    cursor: pointer;
-    border-radius: 50%;
-    display: flex;
-}
-
-.difficulty button svg path{
-    stroke: #FBFFF1;
+    color: #FBFFF1;
 }
 
 .difficulty button:hover{
     background: #FBFFF1;
-    > svg path{
-        stroke: #3C3744;
-    }
+    color: #3C3744;
 }
 
 .turn{
