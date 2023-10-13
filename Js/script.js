@@ -20,8 +20,8 @@ const gameStartDialog = (()=>{
         console.log(e.target.textContent + 'clicked');
         gameStartDialog.anotherPlayerClicked.state = true;
         startDialogSelector.style.display = 'none';
-        const difficulty = document.querySelector('.difficulty');
-        difficulty.innerHTML = '';
+        const difficultyBar = document.querySelector('.difficulty');
+        difficultyBar.innerHTML = '';
         gameRoundController.createOpponents();
 
     });
@@ -297,46 +297,149 @@ const gameRoundController = (()=>{
 
     function takeComputerChoice(){
 
-        let indicesAlreadyTaken = [];
+        let computerChoiceIndex;
 
-        gameRoundController.board.forEach((currentValue,currentIndex,obj)=>{
-            if(currentValue != ''){
-                indicesAlreadyTaken.push(currentIndex);
+        //minmimax
+        if(display.difficultyBtnClicked.hard){
+            let currBdSt = gameRoundController.board;
+            let aiMark = 'O';
+            let humanMark = 'X';
+    
+            function winning(board, player){
+                if (
+                (board[0] == player && board[1] == player && board[2] == player) ||
+                (board[3] == player && board[4] == player && board[5] == player) ||
+                (board[6] == player && board[7] == player && board[8] == player) ||
+                (board[0] == player && board[3] == player && board[6] == player) ||
+                (board[1] == player && board[4] == player && board[7] == player) ||
+                (board[2] == player && board[5] == player && board[8] == player) ||
+                (board[0] == player && board[4] == player && board[8] == player) ||
+                (board[2] == player && board[4] == player && board[6] == player)
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
-        });
-
-        if(gameRoundController.playerChoiceCount <= 8){
-            function generateRandomNumber(indicesAlreadyTaken){
-
-                let randomNumber;
     
-                do{
-                    randomNumber = Math.floor(Math.random() * 9);
-                } while(indicesAlreadyTaken.includes(randomNumber));
+            function minimax(currBdSt, currPlayer){
     
-                return randomNumber;
-            }
+                let emptyIndices = [];
     
-            let computerChoiceIndex = generateRandomNumber(indicesAlreadyTaken);
-            console.log(computerChoiceIndex);
+                currBdSt.forEach((currentValue, currentIndex, obj)=>{
+                    if(currentValue === ''){
+                        emptyIndices.push(currentIndex);
+                    }
+                });
     
-            gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
-                if(currentValue === ''){
-                    if(computerChoiceIndex === currentIndex){
-                        gameRoundController.board[computerChoiceIndex] = gameRoundController.playerTwo.mark;
+                if(winning(currBdSt, aiMark)){
+                    return {score: 1};
+                }
+                else if(winning(currBdSt, humanMark)){
+                    return {score: -1}
+                }
+                else if(emptyIndices.length === 0){
+                    return {score: 0}
+                }
+    
+                let moves = [];
+    
+                emptyIndices.forEach((currentValue, currentIndex, obj)=>{
+    
+                    let move = {};
+                    move.index = emptyIndices[currentIndex];
+                    currBdSt[emptyIndices[currentIndex]] = currPlayer;
+    
+                    if(currPlayer == aiMark){
+                        let result = minimax(currBdSt, humanMark);
+                        move.score = result.score
+                    }
+                    else{
+                        let result = minimax(currBdSt, aiMark);
+                        move.score = result.score;
+                    }
+    
+                    currBdSt[emptyIndices[currentIndex]] = '';
+    
+                    moves.push(move);
+    
+                })
+    
+                let bestMove;
+                if(currPlayer == aiMark){
+                    let bestScore = -Infinity
+                    for(let i=0; i<moves.length; i++){
+                        if(moves[i].score > bestScore){
+                            bestScore = moves[i].score;
+                            bestMove = i;
+                        }
                     }
                 }
-            })
+                else {
+                    let bestScore = Infinity
+                    for(let i=0; i<moves.length; i++){
+                        if(moves[i].score < bestScore){
+                            bestScore = moves[i].score;
+                            bestMove = i;
+                        }
+                    }
+                }
+    
+                return moves[bestMove];
+    
+            }
+    
+            let best = minimax(currBdSt, aiMark);
+            console.log(best);
+            computerChoiceIndex = best.index;
 
-            gameRoundController.playerChoiceCount++;
-            console.log('playerChoiceCount update2 '+ gameRoundController.playerChoiceCount);
-            gameRoundController.currentPlayer = playerOne;
         }
 
 
+        else if(display.difficultyBtnClicked.easy){
+
+            //easy difficulty
+            let indicesAlreadyTaken = [];
+
+            gameRoundController.board.forEach((currentValue,currentIndex,obj)=>{
+                if(currentValue != ''){
+                    indicesAlreadyTaken.push(currentIndex);
+                }
+            });
+
+            if(gameRoundController.playerChoiceCount <= 8){
+                function generateRandomNumber(indicesAlreadyTaken){
+
+                    let randomNumber;
+    
+                    do{
+                        randomNumber = Math.floor(Math.random() * 9);
+                    } while(indicesAlreadyTaken.includes(randomNumber));
+        
+                    return randomNumber;
+                }
+    
+            computerChoiceIndex = generateRandomNumber(indicesAlreadyTaken);
+            console.log(computerChoiceIndex);
 
 
+
+            }
+        }
+
+        gameRoundController.board.forEach((currentValue, currentIndex, obj)=>{
+            if(currentValue === ''){
+                if(computerChoiceIndex === currentIndex){
+                    gameRoundController.board[computerChoiceIndex] = gameRoundController.playerTwo.mark;
+                }
+            }
+        })
+
+        gameRoundController.playerChoiceCount++;
+        console.log('playerChoiceCount update2 '+ gameRoundController.playerChoiceCount);
+        gameRoundController.currentPlayer = playerOne;
     }
+
 
     function updatePlayerComputerChoices(){
         gameRoundController.playerChoiceCount++;
@@ -499,7 +602,51 @@ const display = (()=>{
         })
     }
 
+    //Change difficulty btns
+    let difficultyBtnClicked = {
+        easy: false,
+        hard: false,
+    };
+
+    function changeDifficulty(){
+        const easyBtn = document.querySelector('.easy');
+        const hardBtn = document.querySelector('.hard');
+
+        easyBtn.addEventListener('click', ()=>{
+            
+            //remove hint text
+            const difficultyContainer = document.querySelector('.not-clicked');
+            difficultyContainer.textContent = '';
+            //set difficulty
+            difficultyBtnClicked.easy = true;
+            //deactivate hard
+            if(difficultyBtnClicked.hard){
+                difficultyBtnClicked.hard = false;
+
+                hardBtn.style.background = 'none';
+                hardBtn.style.color = '#FBFFF1';
+            }
+            easyBtn.style.background = '#FBFFF1';
+            easyBtn.style.color = '#3C3744';
+        })
+
+        hardBtn.addEventListener('click', ()=>{
+            difficultyBtnClicked.hard = true;
+            //deactivate easy
+            if(difficultyBtnClicked.easy){
+                difficultyBtnClicked.easy = false;
+                easyBtn.style.background = 'none';
+                easyBtn.style.color = '#FBFFF1';
+            }
+            hardBtn.style.background = '#FBFFF1';
+            hardBtn.style.color = '#3C3744';
+        })
+
+    }
+
+    changeDifficulty();
     
+    //player makes a choice
     boardBlockSelector.forEach((currentValue, currentIndex, obj)=>{
         currentValue.addEventListener('click', ()=>{
             if(gameRoundController.board[currentIndex] === ''){
@@ -517,18 +664,29 @@ const display = (()=>{
                     }
                 }
                 else if(gameStartDialog.computerClicked.state){
-                    if(gameRoundController.currentPlayer === gameRoundController.playerOne){
-                        gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
-                        
-                        //update the choice count, change current player to computer, take computers choice, update choice count, update currentplayer.
-                        gameRoundController.updatePlayerComputerChoices();
-                        
-                        //display the choices.
-                        updateScreen();
-                        
-                        gameRoundController.round();
-   
+                    
+                    if(difficultyBtnClicked.easy === true || difficultyBtnClicked.hard === true){
+                        if(gameRoundController.currentPlayer === gameRoundController.playerOne){
+                            gameRoundController.board[currentIndex] = gameRoundController.playerOne.mark;
+                            
+                            //update the choice count, change current player to computer, take computers choice, update choice count, update currentplayer.
+                            gameRoundController.updatePlayerComputerChoices();
+                            
+                            //display the choices.
+                            updateScreen();
+                            
+                            gameRoundController.round();
+       
+                        }
                     }
+                    else{
+
+                        const difficultyContainer = document.querySelector('.not-clicked');
+                        difficultyContainer.textContent = '* Please select a difficulty';
+                        difficultyContainer.style.color = '#FBFFF1';
+
+                    }
+
                 }
 
             }
@@ -536,8 +694,7 @@ const display = (()=>{
     })
 
 
-
-    return {xIndices, oIndices};
+    return {xIndices, oIndices, difficultyBtnClicked};
 })();
 
 
