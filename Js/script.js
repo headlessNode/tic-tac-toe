@@ -443,9 +443,16 @@ const gameRoundController = (()=>{
 
     function updatePlayerComputerChoices(){
         gameRoundController.playerChoiceCount++;
+        display.updateScreen();
+        gameRoundController.round();
         console.log('playerChoiceCount update1: ' + gameRoundController.playerChoiceCount)
-        gameRoundController.currentPlayer = playerTwo;
-        gameRoundController.takeComputerChoice();
+        if(gameRoundController.playerOne.winner != true && gameRoundController.playerTwo.winner != true && gameRoundController.playerChoiceCount != 9){
+            gameRoundController.currentPlayer = playerTwo;
+            gameRoundController.takeComputerChoice();
+            display.updateScreen();
+            gameRoundController.round();
+        }
+
     }
 
     function round(){
@@ -632,6 +639,7 @@ const display = (()=>{
 
         hardBtn.addEventListener('click', ()=>{
             //remove hint text
+            const difficultyContainer = document.querySelector('.not-clicked');
             difficultyContainer.textContent = '';
             //set difficulty
             difficultyBtnClicked.hard = true;
@@ -675,10 +683,10 @@ const display = (()=>{
                             //update the choice count, change current player to computer, take computers choice, update choice count, update currentplayer.
                             gameRoundController.updatePlayerComputerChoices();
                             
-                            //display the choices.
-                            updateScreen();
+                            // //display the choices.
+                            // updateScreen();
                             
-                            gameRoundController.round();
+                            // gameRoundController.round();
        
                         }
                     }
@@ -697,7 +705,7 @@ const display = (()=>{
     })
 
 
-    return {xIndices, oIndices, difficultyBtnClicked};
+    return {xIndices, oIndices, difficultyBtnClicked, updateScreen};
 })();
 
 
