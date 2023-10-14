@@ -1,4 +1,4 @@
-//module for gamestartdialog
+//module for gamestartdialog/ select human or computer opponent
 const gameStartDialog = (()=>{
     const startDialogSelector = document.querySelector('.game-start-dialog');
     startDialogSelector.showModal();
@@ -135,83 +135,6 @@ const winCondition = (()=>{
 
         }
     }
-
-    //display the winner on the screen.
-    function displayWinner(){
-        const gameEndDialog = document.querySelector('.game-end-dialog');
-        const winner = document.querySelector('.winner')
-        const yesBtn = document.querySelector('.yes-btn');
-        const noBtn = document.querySelector('.no-btn');
-        const displayTurn = document.querySelector('.turn');
-        
-        if(gameRoundController.playerOne.winner){
-            if(gameStartDialog.anotherPlayerClicked.state){
-                displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
-                winner.textContent = gameRoundController.playerOne.name + ' Won!'
-                gameEndDialog.showModal();
-                yesBtn.addEventListener('click', (e)=>{
-                    endGame(e.target);
-                });
-                noBtn. addEventListener('click', (e)=>{
-                    endGame(e.target);
-                });
-            }
-            else if(gameStartDialog.computerClicked.state){
-                let delayInMilliseconds = 1200;
-                setTimeout(()=>{
-                    displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
-                    winner.textContent = gameRoundController.playerOne.name + ' Won!'
-                    gameEndDialog.showModal();
-                    yesBtn.addEventListener('click', (e)=>{
-                        endGame(e.target);
-                    });
-                    noBtn. addEventListener('click', (e)=>{
-                        endGame(e.target);
-                    });}, delayInMilliseconds);
-            }
-        }
-
-        else if(gameRoundController.playerTwo.winner){
-            if(gameStartDialog.anotherPlayerClicked.state){
-                displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
-                winner.textContent = gameRoundController.playerTwo.name + ' Won!'
-                gameEndDialog.showModal();
-                yesBtn.addEventListener('click', (e)=>{
-                    endGame(e.target);
-                });
-                noBtn. addEventListener('click', (e)=>{
-                    endGame(e.target);
-                });
-            }
-            else if(gameStartDialog.computerClicked.state){
-                let delayInMilliseconds = 1200;
-                setTimeout(()=>{
-                    displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
-                    winner.textContent = gameRoundController.playerTwo.name + ' Won!'
-                    gameEndDialog.showModal();
-                    yesBtn.addEventListener('click', (e)=>{
-                        endGame(e.target);
-                    });
-                    noBtn. addEventListener('click', (e)=>{
-                        endGame(e.target);
-                    });
-                }, delayInMilliseconds);
-            }
-        }
-
-        else{
-            displayTurn.textContent = 'It\'s a tie!';
-            winner.textContent = 'Its a tie!'
-            gameEndDialog.showModal();
-            yesBtn.addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
-            noBtn. addEventListener('click', (e)=>{
-                endGame(e.target);
-            });
-        }
-
-    }
     //check who won the game.
     function checkWin (){
 
@@ -221,7 +144,7 @@ const winCondition = (()=>{
             || gameRoundController.board[1] === 'X' && gameRoundController.board[4] === 'X' && gameRoundController.board[7] === 'X' || gameRoundController.board[2] === 'X' && gameRoundController.board[5] === 'X' && gameRoundController.board[8] === 'X'){
 
                 gameRoundController.playerOne.winner = true;
-                displayWinner();           
+                display.displayWinner();           
 
         }
 
@@ -232,17 +155,17 @@ const winCondition = (()=>{
             || gameRoundController.board[1] === 'O' && gameRoundController.board[4] === 'O' && gameRoundController.board[7] === 'O' || gameRoundController.board[2] === 'O' && gameRoundController.board[5] === 'O' && gameRoundController.board[8] === 'O'){
 
                 gameRoundController.playerTwo.winner = true;
-                displayWinner();
+                display.displayWinner();
         }
 
         else if (gameRoundController.playerChoiceCount === 9){
-            displayWinner();
+            display.displayWinner();
         }
     }
 
 
 
-        return {checkWin};
+        return {checkWin, endGame};
 
 })();
 
@@ -707,8 +630,84 @@ const display = (()=>{
         })
     })
 
+    //display the winner on the screen.
+    function displayWinner(){
+        const gameEndDialog = document.querySelector('.game-end-dialog');
+        const winner = document.querySelector('.winner')
+        const yesBtn = document.querySelector('.yes-btn');
+        const noBtn = document.querySelector('.no-btn');
+        const displayTurn = document.querySelector('.turn');
+        
+        if(gameRoundController.playerOne.winner){
+            if(gameStartDialog.anotherPlayerClicked.state){
+                displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
+                winner.textContent = gameRoundController.playerOne.name + ' Won!'
+                gameEndDialog.showModal();
+                yesBtn.addEventListener('click', (e)=>{
+                    winCondition.endGame(e.target);
+                });
+                noBtn. addEventListener('click', (e)=>{
+                    winCondition.endGame(e.target);
+                });
+            }
+            else if(gameStartDialog.computerClicked.state){
+                let delayInMilliseconds = 1200;
+                setTimeout(()=>{
+                    displayTurn.textContent = gameRoundController.playerOne.name + ' won the game!';
+                    winner.textContent = gameRoundController.playerOne.name + ' Won!'
+                    gameEndDialog.showModal();
+                    yesBtn.addEventListener('click', (e)=>{
+                        winCondition.endGame(e.target);
+                    });
+                    noBtn. addEventListener('click', (e)=>{
+                        winCondition.endGame(e.target);
+                    });}, delayInMilliseconds);
+            }
+        }
 
-    return {xIndices, oIndices, difficultyBtnClicked, updateScreen};
+        else if(gameRoundController.playerTwo.winner){
+            if(gameStartDialog.anotherPlayerClicked.state){
+                displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
+                winner.textContent = gameRoundController.playerTwo.name + ' Won!'
+                gameEndDialog.showModal();
+                yesBtn.addEventListener('click', (e)=>{
+                    winCondition.endGame(e.target);
+                });
+                noBtn. addEventListener('click', (e)=>{
+                    winCondition.endGame(e.target);
+                });
+            }
+            else if(gameStartDialog.computerClicked.state){
+                let delayInMilliseconds = 1200;
+                setTimeout(()=>{
+                    displayTurn.textContent = gameRoundController.playerTwo.name + ' won the game!';
+                    winner.textContent = gameRoundController.playerTwo.name + ' Won!'
+                    gameEndDialog.showModal();
+                    yesBtn.addEventListener('click', (e)=>{
+                        winCondition.endGame(e.target);
+                    });
+                    noBtn. addEventListener('click', (e)=>{
+                        winCondition.endGame(e.target);
+                    });
+                }, delayInMilliseconds);
+            }
+        }
+
+        else{
+            displayTurn.textContent = 'It\'s a tie!';
+            winner.textContent = 'Its a tie!'
+            gameEndDialog.showModal();
+            yesBtn.addEventListener('click', (e)=>{
+                winCondition.endGame(e.target);
+            });
+            noBtn. addEventListener('click', (e)=>{
+                winCondition.endGame(e.target);
+            });
+        }
+
+    }
+
+    return {xIndices, oIndices, difficultyBtnClicked, updateScreen, displayWinner};
 })();
 
 
