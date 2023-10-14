@@ -480,7 +480,10 @@ const gameRoundController = (()=>{
         
     }
 
-
+    const reset = document.querySelector('.game-end-dialog .reset-btn');
+    reset.addEventListener('click', ()=>{
+        location.reload();
+    })
 
 
 
