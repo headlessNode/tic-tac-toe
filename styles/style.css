@@ -309,7 +309,7 @@ body{
 
 @media screen and (max-width: 960px) {
     .game-start-dialog{
-        height: 30%;
+        height: 37%;
         width: 20rem;
     }
     .game-start-dialog form footer{
