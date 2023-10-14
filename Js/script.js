@@ -631,6 +631,9 @@ const display = (()=>{
         })
 
         hardBtn.addEventListener('click', ()=>{
+            //remove hint text
+            difficultyContainer.textContent = '';
+            //set difficulty
             difficultyBtnClicked.hard = true;
             //deactivate easy
             if(difficultyBtnClicked.easy){
