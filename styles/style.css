@@ -333,3 +333,11 @@ body{
 
 }
   
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    gap: 15px;
+    padding-bottom: 20px;
+}
